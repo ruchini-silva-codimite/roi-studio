@@ -1,0 +1,32 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.screen {
+  display: none;
+  padding: 24px;
+}
+
+.screen.active {
+  display: block;
+}
+
+button {
+  padding: 10px 16px;
+  margin-top: 16px;
+  cursor: pointer;
+}
+
+.ga-banner {
+  margin-top: 32px;
+  padding: 16px;
+  border: 1px solid #ccc;
+}
+
+.trust {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: #666;
+}
