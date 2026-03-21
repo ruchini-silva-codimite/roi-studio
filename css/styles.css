@@ -91,7 +91,7 @@ input, select {
   border-radius: 4px;
 }
 
-.nav-btns {
+.nav-row {
   display: flex;
   gap: 12px;
   margin-top: 24px;
