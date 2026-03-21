@@ -30,3 +30,32 @@ button {
   font-size: 0.9rem;
   color: #666;
 }
+
+.results-block {
+  margin-top: 24px;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.result-card {
+  border: 1px solid #d9d9d9;
+  padding: 16px;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.result-label {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.result-value {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
