@@ -176,3 +176,42 @@ input, select {
 .step-item.complete .step-marker {
   border-color: #000;
 }
+
+.show-work {
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 12px 16px;
+  background: #fff;
+}
+
+.show-work summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.assumption-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px 16px;
+  margin-top: 16px;
+}
+
+.assumption-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  border: 1px solid #ececec;
+  border-radius: 6px;
+  background: #fafafa;
+}
+
+.assumption-label {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.assumption-value {
+  font-weight: 600;
+  word-break: break-word;
+}
