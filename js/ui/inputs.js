@@ -43,7 +43,20 @@ export function bindStateInputs(containerId, state, onUpdate) {
     container.querySelectorAll('input, select').forEach(input => {
         input.addEventListener('change', (e) => {
             const key = e.target.getAttribute('data-key');
-            const value = e.target.type === 'number' ? parseFloat(e.target.value) : e.target.value;
+            let value = e.target.value;
+
+            if (e.target.type === "number") {
+                value = parseFloat(value);
+
+                if (isNaN(value)) value = 0;
+                if (value < 0) value = 0;
+
+                if (key.includes("Percent") && value > 100) value = 100;
+                if (key.includes("users") && value > 100000) value = 100000;
+                if (key.includes("Rate") && value > 1000) value = 1000;
+                if ((key.includes("time") || key.includes("Seconds") || key.includes("Minutes")) && value > 86400) value = 86400;
+            }
+
             setNestedValue(state, key, value);
             if (onUpdate) onUpdate(key, value);
         });
