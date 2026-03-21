@@ -2,46 +2,57 @@ import { initRouter } from "./router.js";
 import { initState } from "./state.js";
 import { renderResults } from "./ui/results.js";
 import { renderAllForms } from "./ui/inputs.js";
+import { renderStepper } from "./ui/stepper.js";
+import { renderSummaryPanel } from "./ui/summary.js";
+
+function renderShell(step) {
+  renderStepper(step);
+  renderSummaryPanel(window.appState);
+}
+
+function goToStep(step) {
+  renderShell(step);
+  window.navigate(step);
+}
 
 function initApp() {
-    initState();
-    initRouter();
+  initState();
+  initRouter();
+  renderAllForms(window.appState);
+
+  document.getElementById("start-btn").addEventListener("click", () => {
+    goToStep("context");
+  });
+
+  document.getElementById("to-usage").addEventListener("click", () => {
     renderAllForms(window.appState);
+    goToStep("usage");
+  });
 
-    // Navigation Wiring
-    document.getElementById("start-btn").addEventListener("click", () => {
-        window.navigate("context");
-    });
+  document.getElementById("back-to-context").addEventListener("click", () => {
+    renderAllForms(window.appState);
+    goToStep("context");
+  });
 
-    document.getElementById("to-landing").addEventListener("click", () => {
-        window.navigate("landing");
-    });
+  document.getElementById("to-operations").addEventListener("click", () => {
+    renderAllForms(window.appState);
+    goToStep("operations");
+  });
 
-    document.getElementById("to-usage").addEventListener("click", () => {
-        window.navigate("usage");
-    });
+  document.getElementById("back-to-usage").addEventListener("click", () => {
+    renderAllForms(window.appState);
+    goToStep("usage");
+  });
 
-    document.getElementById("to-context").addEventListener("click", () => {
-        window.navigate("context");
-    });
+  document.getElementById("to-results").addEventListener("click", () => {
+    renderResults(window.appState);
+    goToStep("results");
+  });
 
-    document.getElementById("to-operations").addEventListener("click", () => {
-        window.navigate("operations");
-    });
-
-    document.getElementById("to-usage-back").addEventListener("click", () => {
-        window.navigate("usage");
-    });
-
-    document.getElementById("to-results").addEventListener("click", () => {
-        renderResults(window.appState);
-        window.navigate("results");
-    });
-
-    document.getElementById("edit-inputs").addEventListener("click", () => {
-        renderAllForms(window.appState); // Refresh forms
-        window.navigate("context");
-    });
+  document.getElementById("edit-inputs").addEventListener("click", () => {
+    renderAllForms(window.appState);
+    goToStep("context");
+  });
 }
 
 initApp();
