@@ -1,5 +1,6 @@
 import { initRouter } from "./router.js";
 import { initState } from "./state.js";
+import { renderResults } from "./ui/results.js";
 
 function initApp() {
   initState();
@@ -18,6 +19,7 @@ function initApp() {
   });
 
   document.getElementById("to-results").addEventListener("click", () => {
+    renderResults(window.appState);
     window.navigate("results");
   });
 
