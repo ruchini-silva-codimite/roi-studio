@@ -1,113 +1,119 @@
 /**
- * Input field components and form rendering logic for Task 3
+ * Task 3: Implementation of form rendering and state binding logic.
+ * This file strictly follows the requested functional structure.
  */
 
-function createNumberField(label, value, key, onChange) {
-    const field = document.createElement('div');
-    field.className = 'form-field';
-    field.innerHTML = `
-        <label class="field-label">${label}</label>
-        <input type="number" data-key="${key}" value="${value || 0}">
-    `;
-    field.querySelector('input').addEventListener('input', (e) => onChange(key, parseFloat(e.target.value)));
-    return field;
-}
-
-function createSelectField(label, value, options, key, onChange) {
-    const field = document.createElement('div');
-    field.className = 'form-field';
-    const optionsHtml = options.map(opt => `<option value="${opt.value}" ${opt.value === value ? 'selected' : ''}>${opt.label}</option>`).join('');
-    field.innerHTML = `
-        <label class="field-label">${label}</label>
-        <select data-key="${key}">
-            ${optionsHtml}
-        </select>
-    `;
-    field.querySelector('select').addEventListener('change', (e) => onChange(key, e.target.value));
-    return field;
-}
-
-function setNestedValue(obj, path, value) {
-    const parts = path.split('.');
+export function setNestedValue(obj, path, value) {
+    const keys = path.split('.');
     let current = obj;
-    for (let i = 0; i < parts.length - 1; i++) {
-        current = current[parts[i]];
+    for (let i = 0; i < keys.length - 1; i++) {
+        current = current[keys[i]];
     }
-    current[parts[parts.length - 1]] = value;
+    current[keys[keys.length - 1]] = value;
+}
+
+function createNumberField(label, value, key) {
+    return `
+        <div class="form-field">
+            <label class="field-label">${label}</label>
+            <input type="number" data-key="${key}" value="${value}">
+        </div>
+    `;
+}
+
+function createSelectField(label, value, options, key) {
+    const optionsHtml = options.map(opt => 
+        `<option value="${opt.value}" ${opt.value === value ? 'selected' : ''}>${opt.label}</option>`
+    ).join('');
+    
+    return `
+        <div class="form-field">
+            <label class="field-label">${label}</label>
+            <select data-key="${key}">
+                ${optionsHtml}
+            </select>
+        </div>
+    `;
+}
+
+export function bindStateInputs(containerId, state, onUpdate) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    container.querySelectorAll('input, select').forEach(input => {
+        input.addEventListener('change', (e) => {
+            const key = e.target.getAttribute('data-key');
+            const value = e.target.type === 'number' ? parseFloat(e.target.value) : e.target.value;
+            setNestedValue(state, key, value);
+            if (onUpdate) onUpdate(key, value);
+        });
+    });
 }
 
 export function renderContextForm(state) {
     const container = document.getElementById('context-form');
     if (!container) return;
-    container.innerHTML = '';
 
-    const grid = document.createElement('div');
-    grid.className = 'form-grid';
+    container.innerHTML = `
+        <div class="form-grid">
+            ${createSelectField('Industry', state.organization.industry, [
+                { value: 'generic', label: 'Generic Enterprise' },
+                { value: 'healthcare', label: 'Healthcare' }
+            ], 'organization.industry')}
+            
+            ${createNumberField('Number of Users', state.organization.userCount, 'organization.userCount')}
+            
+            ${createSelectField('Current Scenario', state.organization.currentScenario, [
+                { value: 'manual', label: 'Manual ChromeOS' },
+                { value: 'standard', label: 'Managed ChromeOS (Standard)' },
+                { value: 'healthcare_traveler_onboarding', label: 'Healthcare Traveler Onboarding' }
+            ], 'organization.currentScenario')}
+        </div>
+    `;
 
-    const onUpdate = (key, val) => {
-        setNestedValue(state, key, val);
-        renderAllForms(state); // Re-render to handle conditional healthcare fields
-    };
-
-    grid.appendChild(createSelectField('Industry', state.organization.industry, [
-        { value: 'generic', label: 'Generic Enterprise' },
-        { value: 'healthcare', label: 'Healthcare' }
-    ], 'organization.industry', onUpdate));
-
-    grid.appendChild(createNumberField('Number of Users', state.organization.userCount, 'organization.userCount', onUpdate));
-
-    grid.appendChild(createSelectField('Current Scenario', state.organization.currentScenario, [
-        { value: 'manual', label: 'Manual ChromeOS' },
-        { value: 'standard', label: 'Managed ChromeOS (Standard)' },
-        { value: 'healthcare_traveler_onboarding', label: 'Healthcare Traveler Onboarding' }
-    ], 'organization.currentScenario', onUpdate));
-
-    container.appendChild(grid);
+    bindStateInputs('context-form', state, () => renderAllForms(state));
 }
 
 export function renderUsageForm(state) {
     const container = document.getElementById('usage-form');
     if (!container) return;
-    container.innerHTML = '';
 
-    const grid = document.createElement('div');
-    grid.className = 'form-grid';
-
-    const onUpdate = (key, val) => setNestedValue(state, key, val);
-
-    grid.appendChild(createNumberField('Avg Daily Apps per User', state.productivity.avgDailyApps, 'productivity.avgDailyApps', onUpdate));
-    grid.appendChild(createNumberField('Session Frequency (per day)', state.productivity.sessionFrequency, 'productivity.sessionFrequency', onUpdate));
-    grid.appendChild(createNumberField('Employee Hourly Rate ($)', state.productivity.employeeHourlyRate, 'productivity.employeeHourlyRate', onUpdate));
+    let html = `
+        <div class="form-grid">
+            ${createNumberField('Avg Daily Apps per User', state.productivity.avgDailyApps, 'productivity.avgDailyApps')}
+            ${createNumberField('Session Frequency (per day)', state.productivity.sessionFrequency, 'productivity.sessionFrequency')}
+            ${createNumberField('Employee Hourly Rate ($)', state.productivity.employeeHourlyRate, 'productivity.employeeHourlyRate')}
+        </div>
+    `;
 
     // Conditional Healthcare Section
     if (state.organization.industry === 'healthcare' || state.organization.currentScenario === 'healthcare_traveler_onboarding') {
-        const hcSection = document.createElement('div');
-        hcSection.className = 'form-section';
-        hcSection.innerHTML = '<h3>Healthcare Specifics</h3>';
-        const hcGrid = document.createElement('div');
-        hcGrid.className = 'form-grid';
-        hcGrid.appendChild(createNumberField('Clinician Hourly Rate ($)', state.healthcare.clinicianHourlyRate, 'healthcare.clinicianHourlyRate', onUpdate));
-        hcSection.appendChild(hcGrid);
-        grid.appendChild(hcSection);
+        html += `
+            <div class="form-section">
+                <h3>Healthcare Specifics</h3>
+                <div class="form-grid">
+                    ${createNumberField('Clinician Hourly Rate ($)', state.healthcare.clinicianHourlyRate, 'healthcare.clinicianHourlyRate')}
+                </div>
+            </div>
+        `;
     }
 
-    container.appendChild(grid);
+    container.innerHTML = html;
+    bindStateInputs('usage-form', state);
 }
 
 export function renderOperationsForm(state) {
     const container = document.getElementById('operations-form');
     if (!container) return;
-    container.innerHTML = '';
 
-    const grid = document.createElement('div');
-    grid.className = 'form-grid';
+    container.innerHTML = `
+        <div class="form-grid">
+            ${createNumberField('VLauncher Subscription ($/user/mo)', state.cost.monthlySubscription, 'cost.monthlySubscription')}
+            ${createNumberField('IT Admin Annual Salary ($)', state.productivity.itSalary, 'productivity.itSalary')}
+        </div>
+    `;
 
-    const onUpdate = (key, val) => setNestedValue(state, key, val);
-
-    grid.appendChild(createNumberField('VLauncher Subscription ($/user/mo)', state.cost.monthlySubscription, 'cost.monthlySubscription', onUpdate));
-    grid.appendChild(createNumberField('IT Admin Annual Salary ($)', state.productivity.itSalary, 'productivity.itSalary', onUpdate));
-
-    container.appendChild(grid);
+    bindStateInputs('operations-form', state);
 }
 
 export function renderAllForms(state) {
