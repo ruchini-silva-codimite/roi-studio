@@ -51,10 +51,11 @@ export function bindStateInputs(containerId, state, onUpdate) {
                 if (isNaN(value)) value = 0;
                 if (value < 0) value = 0;
 
-                if (key.includes("Percent") && value > 100) value = 100;
-                if (key.includes("users") && value > 100000) value = 100000;
-                if (key.includes("Rate") && value > 1000) value = 1000;
-                if ((key.includes("time") || key.includes("Seconds") || key.includes("Minutes")) && value > 86400) value = 86400;
+                const lowerKey = key.toLowerCase();
+                if (lowerKey.includes("percent") && value > 100) value = 100;
+                if (lowerKey.includes("user") && value > 100000) value = 100000;
+                if ((lowerKey.includes("rate") || lowerKey.includes("hourlyvalue")) && value > 1000) value = 1000;
+                if ((lowerKey.includes("time") || lowerKey.includes("seconds") || lowerKey.includes("minutes")) && value > 86400) value = 86400;
             }
 
             setNestedValue(state, key, value);
