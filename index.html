@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ROI Studio - VLauncher</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <div id="app">
+
+    <!-- Landing -->
+    <section id="screen-landing" class="screen active">
+      <h1>ROI Assessment for ChromeOS + VLauncher</h1>
+      <p>Estimate cost savings and operational impact based on your environment.</p>
+
+      <button id="start-btn">Start ROI Assessment</button>
+
+      <p class="trust">No email required. Adjust every assumption.</p>
+
+      <div class="ga-banner">
+        <h3>Join the VLauncher GA waitlist</h3>
+        <input type="email" placeholder="Work email" />
+        <button>Join</button>
+      </div>
+    </section>
+
+    <!-- Context -->
+    <section id="screen-context" class="screen">
+      <h2>Context</h2>
+      <div id="context-form"></div>
+      <button id="to-usage">Next</button>
+    </section>
+
+    <!-- Usage -->
+    <section id="screen-usage" class="screen">
+      <h2>Usage & Productivity</h2>
+      <div id="usage-form"></div>
+      <button id="to-operations">Next</button>
+    </section>
+
+    <!-- Operations -->
+    <section id="screen-operations" class="screen">
+      <h2>Operations & Cost</h2>
+      <div id="operations-form"></div>
+      <button id="to-results">Calculate</button>
+    </section>
+
+    <!-- Results -->
+    <section id="screen-results" class="screen">
+      <h2>Results</h2>
+      <div id="results-container"></div>
+      <button id="edit-inputs">Edit Inputs</button>
+    </section>
+
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
