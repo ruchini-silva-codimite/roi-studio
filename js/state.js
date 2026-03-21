@@ -1,10 +1,5 @@
+import { assumptions } from "./data/assumptions.js";
+
 export function initState() {
-  window.appState = {
-    organization: {},
-    productivity: {},
-    itOps: {},
-    onboarding: {},
-    healthcare: {},
-    cost: {}
-  };
+  window.appState = JSON.parse(JSON.stringify(assumptions));
 }
