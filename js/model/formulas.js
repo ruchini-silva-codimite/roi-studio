@@ -1,15 +1,19 @@
-export const calcProductivitySavings = (users, hourlyRate, loginsPerDay, secSavedPerLogin) => {
-  const annualHoursSaved = (users * loginsPerDay * secSavedPerLogin * 260) / 3600;
-  return annualHoursSaved * hourlyRate;
-};
+export function secondsToHours(seconds) {
+  return seconds / 3600;
+}
 
-export const calcITOperationalSavings = (devices, itHourlyRate, helpdeskReduction) => {
-  const avgTicketsPerDeviceYear = 4;
-  const hoursPerTicket = 0.5;
-  const totalITCost = devices * avgTicketsPerDeviceYear * hoursPerTicket * itHourlyRate;
-  return totalITCost * helpdeskReduction;
-};
+export function minutesToHours(minutes) {
+  return minutes / 60;
+}
 
-export const calcCapExAvoidance = (devices, unitCost, lifeSpan) => {
-  return (devices * unitCost) / lifeSpan;
-};
+export function percentToDecimal(percent) {
+  return percent / 100;
+}
+
+export function roundNumber(value, digits = 2) {
+  return Number(Number(value).toFixed(digits));
+}
+
+export function roundCurrency(value) {
+  return roundNumber(value, 2);
+}
