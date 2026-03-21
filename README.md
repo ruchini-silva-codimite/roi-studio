@@ -1,13 +1,1 @@
-# ROI Studio
-
-Enterprise-grade ROI assessment tool for ChromeOS + VLauncher.
-
-## Current Status
-Initial UI skeleton and modular project structure created.
-
-## Planned Build Phases
-1. UI skeleton
-2. ROI engine
-3. Input flow
-4. Results and transparency
-5. Enhancements and integrations
+IyBST0kgU3R1ZGlvCgpFbnRlcnByaXNlLWdyYWRlIFJPSSBhc3Nlc3NtZW50\nIHRvb2wgZm9yIENocm9tZU9TICsgVkxhdW5jaGVyLgoKIyMgQ3VycmVudCBT\ndGF0dXMKSW5pdGlhbCBVSSBza2VsZXRvbiBhbmQgbW9kdWxhciBwcm9qZWN0\nIHN0cnVjdHVyZSBjcmVhdGVkLgoKIyMgUGxhbm5lZCBCdWlsZCBQaGFzZXMK\nMS4gVUkgc2tlbGV0b24KMi4gUk9JIGVuZ2luZQozLiBJbnB1dCBmbG93CjQu\nIFJlc3VsdHMgYW5kIHRyYW5zcGFyZW5jeQo1LiBFbmhhbmNlbWVudHMgYW5k\nIGludGVncmF0aW9ucwoKRGlhZ25vc3RpYyBjaGVjaw==\n
