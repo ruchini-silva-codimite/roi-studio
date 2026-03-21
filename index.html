@@ -7,60 +7,87 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-
   <div id="app">
 
-    <!-- Landing -->
     <section id="screen-landing" class="screen active">
       <h1>ROI Assessment for ChromeOS + VLauncher</h1>
       <p>Estimate cost savings and operational impact based on your environment.</p>
 
-      <button id="start-btn">Start ROI Assessment</button>
+      <button id="start-btn" type="button">Start ROI Assessment</button>
 
       <p class="trust">No email required. Adjust every assumption.</p>
 
       <div class="ga-banner">
         <h3>Join the VLauncher GA waitlist</h3>
         <input type="email" placeholder="Work email" />
-        <button>Join</button>
+        <button type="button">Join</button>
       </div>
     </section>
 
-    <!-- Context -->
     <section id="screen-context" class="screen">
-      <h2>Context</h2>
-      <div id="context-form"></div>
-      <div class="nav-row">
-        <button id="to-landing">Back</button>
-        <button id="to-usage">Next</button>
+      <div class="app-shell">
+        <div class="main-panel">
+          <div id="stepper"></div>
+          <h2>Context</h2>
+          <div id="context-form"></div>
+          <div class="nav-row">
+            <button id="to-usage" type="button">Next</button>
+          </div>
+        </div>
+        <aside class="side-panel">
+          <div id="summary-panel"></div>
+        </aside>
       </div>
     </section>
 
-    <!-- Usage -->
     <section id="screen-usage" class="screen">
-      <h2>Usage & Productivity</h2>
-      <div id="usage-form"></div>
-      <div class="nav-row">
-        <button id="to-context">Back</button>
-        <button id="to-operations">Next</button>
+      <div class="app-shell">
+        <div class="main-panel">
+          <div id="stepper"></div>
+          <h2>Usage & Productivity</h2>
+          <div id="usage-form"></div>
+          <div class="nav-row">
+            <button id="back-to-context" type="button">Back</button>
+            <button id="to-operations" type="button">Next</button>
+          </div>
+        </div>
+        <aside class="side-panel">
+          <div id="summary-panel"></div>
+        </aside>
       </div>
     </section>
 
-    <!-- Operations -->
     <section id="screen-operations" class="screen">
-      <h2>Operations & Cost</h2>
-      <div id="operations-form"></div>
-      <div class="nav-row">
-        <button id="to-usage-back">Back</button>
-        <button id="to-results">Calculate</button>
+      <div class="app-shell">
+        <div class="main-panel">
+          <div id="stepper"></div>
+          <h2>Operations & Cost</h2>
+          <div id="operations-form"></div>
+          <div class="nav-row">
+            <button id="back-to-usage" type="button">Back</button>
+            <button id="to-results" type="button">Calculate</button>
+          </div>
+        </div>
+        <aside class="side-panel">
+          <div id="summary-panel"></div>
+        </aside>
       </div>
     </section>
 
-    <!-- Results -->
     <section id="screen-results" class="screen">
-      <h2>Results</h2>
-      <div id="results-container"></div>
-      <button id="edit-inputs">Edit Inputs</button>
+      <div class="app-shell">
+        <div class="main-panel">
+          <div id="stepper"></div>
+          <h2>Results</h2>
+          <div id="results-container"></div>
+          <div class="nav-row">
+            <button id="edit-inputs" type="button">Edit Inputs</button>
+          </div>
+        </div>
+        <aside class="side-panel">
+          <div id="summary-panel"></div>
+        </aside>
+      </div>
     </section>
 
   </div>

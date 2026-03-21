@@ -96,3 +96,83 @@ input, select {
   gap: 12px;
   margin-top: 24px;
 }
+
+.app-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 24px;
+}
+
+.main-panel {
+  min-width: 0;
+}
+
+.side-panel {
+  position: relative;
+}
+
+.summary-card {
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 16px;
+  background: #fafafa;
+  position: sticky;
+  top: 24px;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.summary-label {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.summary-value {
+  font-weight: 600;
+  text-align: right;
+}
+
+.stepper {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+}
+
+.step-item.active {
+  color: #000;
+  font-weight: 700;
+}
+
+.step-item.complete {
+  color: #000;
+}
+
+.step-marker {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #d9d9d9;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  background: #fff;
+}
+
+.step-item.active .step-marker,
+.step-item.complete .step-marker {
+  border-color: #000;
+}
